@@ -5,9 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Léo Pneus e Borracharia</title>
     <!-- CSS Local -->
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./style-2.css">
     <!-- Font Awesome para Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SDK do EmailJS para envio automático -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          emailjs.init("SUA_PUBLIC_KEY_AQUI"); // Substitua pela sua Public Key do EmailJS
+       })();
+    </script>
     <!-- Fonte Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,34 +69,33 @@
             </div>
         </div>
 
+        <!-- Menu Principal Limpo -->
         <nav class="nav-bar" id="navBar">
             <div class="container">
                 <ul class="menu">
-                    <li><a href="#aro13"><i class="fa-solid fa-compact-disc"></i> Pneus Aro 13</a></li>
-                    <li><a href="#passeio"><i class="fa-solid fa-car-side"></i> Passeio</a></li>
-                    <li><a href="#suv"><i class="fa-solid fa-car-rear"></i> SUV's & Crossovers</a></li>
-                    <li><a href="#picapes"><i class="fa-solid fa-truck-pickup"></i> Picapes & Utilitários</a></li>
-                    <li><a href="#servicos" class="highlight-link"><i class="fa-solid fa-wrench"></i> Serviços de Borracharia</a></li>
+                    <li><a href="#rodas"><i class="fa-solid fa-compact-disc"></i> Rodas Esportivas</a></li>
+                    <li><a href="#passeio"><i class="fa-solid fa-car-side"></i> Carro de Passeio</a></li>
+                    <li><a href="#suv"><i class="fa-solid fa-car-rear"></i> SUV's</a></li>
+                    <li><a href="#utilitario"><i class="fa-solid fa-truck-pickup"></i> Utilitário</a></li>
+                    <li><a href="#servicos" class="highlight-link"><i class="fa-solid fa-wrench"></i> Serviços</a></li>
                 </ul>
             </div>
         </nav>
     </header>
     
     <main>
-        <!-- 1. Seção Principal (Banner Rotativo com Imagens e Textos Interativos) -->
+        <!-- 1. Seção Principal (Banner Rotativo) -->
         <section class="sec-principal">
             <div class="container">
                 <div class="hero-static-panel">
-                    
                     <div class="hero-text-slider" id="heroSlider">
                         
-                        <!-- BANNER 1: Pneus em Promoção -->
                         <div class="hero-slide active" aria-hidden="false">
                             <div class="slide-content-grid">
                                 <div class="slide-text-side">
                                     <span class="badge-promo"><i class="fa-solid fa-fire"></i> MEGA PROMOÇÃO DE PNEUS</span>
                                     <h2>ENCONTRE O PNEU CERTO COM <span class="highlight">O MELHOR PREÇO</span></h2>
-                                    <p>Qualidade, segurança e preços imbatíveis para rodar com tranquilidade. Selecione abaixo e finalize no WhatsApp!</p>
+                                    <p>Qualidade, segurança e preços imbatíveis para rodar com tranquilidade. Selecione abaixo e finalize seu pedido!</p>
                                     <ul class="hero-benefits horizontal-benefits">
                                         <li><i class="fa-solid fa-circle-check"></i> Montagem grátis no jogo</li>
                                         <li><i class="fa-solid fa-circle-check"></i> Garantia de fábrica de 5 anos</li>
@@ -101,7 +107,6 @@
                             </div>
                         </div>
 
-                        <!-- BANNER 2: Rodas Esportivas e Aros -->
                         <div class="hero-slide" aria-hidden="true">
                             <div class="slide-content-grid">
                                 <div class="slide-text-side">
@@ -119,7 +124,6 @@
                             </div>
                         </div>
 
-                        <!-- BANNER 3: Jogo Completo de Segurança -->
                         <div class="hero-slide" aria-hidden="true">
                             <div class="slide-content-grid">
                                 <div class="slide-text-side">
@@ -137,7 +141,6 @@
                             </div>
                         </div>
 
-                        <!-- INDICADORES -->
                         <div class="slide-dots">
                             <button class="dot active" type="button" aria-label="Mostrar banner 1" aria-current="true"></button>
                             <button class="dot" type="button" aria-label="Mostrar banner 2"></button>
@@ -145,37 +148,28 @@
                         </div>
 
                     </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- 2. Seção Separada Para o Formulário Horizontal -->
+        <!-- 2. Seção Seletor Rápido -->
         <section class="sec-seletor">
             <div class="container">
                 <div class="tire-selector-card horizontal-card">
                     <h3><i class="fa-solid fa-sliders"></i> Seleção Rápida de Pneu</h3>
-                    
                     <div class="form-row">
+                        
+                        <!-- Categoria do Veículo -->
                         <div class="form-group">
                             <label for="tipoVeiculo">Categoria do Veículo:</label>
                             <select id="tipoVeiculo">
-                                <option value="Passeio">Carro de Passeio</option>
-                                <option value="SUV">SUV / Crossover</option>
-                                <option value="Picape">Picape / Utilitário</option>
+                                <option value="Carro de Passeio">Carro de Passeio</option>
+                                <option value="SUV's">SUV's</option>
+                                <option value="Utilitario">Utilitário</option>
                             </select>
                         </div>
 
-                        <div class="form-group">
-                            <label for="medidaPneu">Medida / Aro / Preço Unitário:</label>
-                            <select id="medidaPneu">
-                                <option value="165/70 R13 (Goodyear)|279.90">165/70 R13 Goodyear - R$ 279,90</option>
-                                <option value="175/70 R13 (Dunlop)|299.90" selected>175/70 R13 Dunlop - R$ 299,90</option>
-                                <option value="175/60 R13 (Pirelli)|319.90">175/60 R13 Pirelli - R$ 319,90</option>
-                                <option value="155/80 R13 (Continental)|269.90">155/80 R13 Continental - R$ 269,90</option>
-                            </select>
-                        </div>
-
+                        <!-- Quantidade -->
                         <div class="form-group">
                             <label for="qtdPneu">Quantidade:</label>
                             <select id="qtdPneu">
@@ -185,9 +179,164 @@
                             </select>
                         </div>
 
+                        <!-- Menu Cascata / Medida e Aro -->
+                        <div class="form-group selector-dropdown-wrapper">
+                            <label for="medidaPneu">Medida / Aro / Preço Unitário:</label>
+                            
+                            <div class="custom-select-trigger" id="selectAroTrigger">
+                                <span id="selectedAroText">Selecione o Aro e Medida...</span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+
+                            <div class="aros-mega-menu" id="arosMegaMenu">
+                                <!-- Aro 13 -->
+                                <div class="aro-item-group">
+                                    <div class="aro-header">Aro 13 <i class="fa-solid fa-chevron-right"></i></div>
+                                    <div class="medidas-subbox">
+                                        <div class="medida-option" data-medida="165/70 R13">165/70 R13 (Ver Opções de Marcas)</div>
+                                        <div class="medida-option" data-medida="175/70 R13">175/70 R13 (Ver Opções de Marcas)</div>
+                                        <div class="medida-option" data-medida="175/60 R13">175/60 R13 (Ver Opções de Marcas)</div>
+                                    </div>
+                                </div>
+
+                                <!-- Aro 14 -->
+                                <div class="aro-item-group">
+                                    <div class="aro-header">Aro 14 <i class="fa-solid fa-chevron-right"></i></div>
+                                    <div class="medidas-subbox">
+                                        <div class="medida-option" data-medida="175/65 R14">175/65 R14 (Ver Opções de Marcas)</div>
+                                        <div class="medida-option" data-medida="185/65 R14">185/65 R14 (Ver Opções de Marcas)</div>
+                                        <div class="medida-option" data-medida="185 R14C">185 R14C Utilitário (Ver Marcas)</div>
+                                    </div>
+                                </div>
+
+                                <!-- Aro 15 -->
+                                <div class="aro-item-group">
+                                    <div class="aro-header">Aro 15 <i class="fa-solid fa-chevron-right"></i></div>
+                                    <div class="medidas-subbox">
+                                        <div class="medida-option" data-medida="195/55 R15">195/55 R15 (Ver Opções de Marcas)</div>
+                                        <div class="medida-option" data-medida="205/70 R15">205/70 R15 SUV (Ver Marcas)</div>
+                                    </div>
+                                </div>
+
+                                <!-- Aro 16 -->
+                                <div class="aro-item-group">
+                                    <div class="aro-header">Aro 16 <i class="fa-solid fa-chevron-right"></i></div>
+                                    <div class="medidas-subbox">
+                                        <div class="medida-option" data-medida="205/55 R16">205/55 R16 (Ver Opções de Marcas)</div>
+                                        <div class="medida-option" data-medida="245/70 R16">245/70 R16 Utilitário (Ver Marcas)</div>
+                                    </div>
+                                </div>
+
+                                <!-- Aro 17 -->
+                                <div class="aro-item-group">
+                                    <div class="aro-header">Aro 17 <i class="fa-solid fa-chevron-right"></i></div>
+                                    <div class="medidas-subbox">
+                                        <div class="medida-option" data-medida="225/65 R17">225/65 R17 SUV (Ver Marcas)</div>
+                                        <div class="medida-option" data-medida="215/50 R17">215/50 R17 (Ver Opções de Marcas)</div>
+                                    </div>
+                                </div>
+
+                                <!-- Aro 18 -->
+                                <div class="aro-item-group">
+                                    <div class="aro-header">Aro 18 <i class="fa-solid fa-chevron-right"></i></div>
+                                    <div class="medidas-subbox">
+                                        <div class="medida-option" data-medida="235/60 R18">235/60 R18 SUV (Ver Marcas)</div>
+                                    </div>
+                                </div>
+
+                                <!-- Aro 19 -->
+                                <div class="aro-item-group">
+                                    <div class="aro-header">Aro 19 <i class="fa-solid fa-chevron-right"></i></div>
+                                    <div class="medidas-subbox">
+                                        <div class="medida-option" data-medida="235/55 R19">235/55 R19 Sport (Ver Marcas)</div>
+                                    </div>
+                                </div>
+
+                                <!-- Aro 20 -->
+                                <div class="aro-item-group">
+                                    <div class="aro-header">Aro 20 <i class="fa-solid fa-chevron-right"></i></div>
+                                    <div class="medidas-subbox">
+                                        <div class="medida-option" data-medida="275/60 R20">275/60 R20 Utilitário (Ver Marcas)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="hidden" id="medidaPneu" value="165/70 R13 (Goodyear)|279.90">
+                        </div>
+
+                        <!-- Botão Adicionar -->
                         <div class="form-group btn-group">
                             <button type="button" class="btn-add-cart" id="addToCartBtn">
-                                <i class="fa-solid fa-cart-plus"></i> Adicionar & Finalizar
+                                <i class="fa-solid fa-cart-plus"></i> Ver Detalhes & Comprar
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Seção de Rodas Esportivas -->
+        <section class="sec-produtos" id="rodas">
+            <div class="container">
+                <div class="section-title">
+                    <h2>RODAS <span>ESPORTIVAS</span></h2>
+                    <p>Ligas leves de alta performance e design exclusivo para elevar o visual do seu veículo</p>
+                </div>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <span class="badge-card-promo">Lançamento</span>
+                        <div class="product-img-wrapper">
+                            <img src="./assets/img/jogo de rodas.webp" alt="Roda Esportiva Aro 14" class="product-img">
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Liga Leve • Aro 14</span>
+                            <h3 class="product-title">Roda Esportiva Aro 14 Black</h3>
+                            <p class="product-desc">Acabamento diamantado com preto fosco. Alta resistência a impactos urbanos.</p>
+                            <div class="product-price-box">
+                                <small>Valor Unitário</small>
+                                <div class="price">R$ 449,90</div>
+                                <span class="installment">em até 6x de R$ 74,98 sem juros</span>
+                            </div>
+                            <button class="btn-card-buy" onclick="abrirDetalhesProduto('Rodas', 'Roda Aro 14 Black', 449.90, 'Aro 14', '14 polegadas', 'Liga Leve Diamantada/Preto Fosco', 'Padrão Universal 4 furos', 'Global Tech Web')">
+                                <i class="fa-solid fa-circle-info"></i> Ver Detalhes
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <span class="badge-card-promo">Destaque</span>
+                        <div class="product-img-wrapper">
+                            <img src="./assets/img/jogo de rodas.webp" alt="Roda Esportiva Aro 15" class="product-img">
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Liga Leve • Aro 15</span>
+                            <h3 class="product-title">Roda Esportiva Aro 15 Sport</h3>
+                            <p class="product-desc">Design moderno em V, compatível com a maioria dos veículos nacionais e importados.</p>
+                            <div class="product-price-box">
+                                <small>Valor Unitário</small>
+                                <div class="price">R$ 529,90</div>
+                                <span class="installment">em até 6x de R$ 88,31 sem juros</span>
+                            </div>
+                            <button class="btn-card-buy" onclick="abrirDetalhesProduto('Rodas', 'Roda Aro 15 Sport', 529.90, 'Aro 15', '15 polegadas', 'Liga Leve Esportiva Design V', 'Padrão Universal 4/5 furos', 'Global Tech Web')">
+                                <i class="fa-solid fa-circle-info"></i> Ver Detalhes
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-img-wrapper">
+                            <img src="./assets/img/jogo de rodas.webp" alt="Roda Esportiva Aro 16" class="product-img">
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">Liga Leve • Aro 16</span>
+                            <h3 class="product-title">Roda Esportiva Aro 16 Turbo</h3>
+                            <p class="product-desc">Performance aerodinâmica superior, leveza e durabilidade garantida.</p>
+                            <div class="product-price-box">
+                                <small>Valor Unitário</small>
+                                <div class="price">R$ 619,90</div>
+                                <span class="installment">em até 6x de R$ 103,31 sem juros</span>
+                            </div>
+                            <button class="btn-card-buy" onclick="abrirDetalhesProduto('Rodas', 'Roda Aro 16 Turbo', 619.90, 'Aro 16', '16 polegadas', 'Liga Leve Aerodinâmica', 'Padrão Esportivo Reforçado', 'Global Tech Web')">
+                                <i class="fa-solid fa-circle-info"></i> Ver Detalhes
                             </button>
                         </div>
                     </div>
@@ -195,329 +344,426 @@
             </div>
         </section>
 
-        <!-- SEÇÃO PNEUS ARO 13 -->
-        <section class="sec-produtos" id="aro13">
+        <!-- 4. Seção Carro de Passeio -->
+        <section class="sec-produtos" id="passeio">
             <div class="container">
-                
                 <div class="section-title">
-                    <h2>PNEUS <span>ARO 13</span></h2>
-                    <p>Modelos com alta aderência, durabilidade e compatibilidade para o seu veículo</p>
+                    <h2>CARRO DE <span>PASSEIO</span></h2>
+                    <p>Pneus desenvolvidos para conforto, economia de combustível e aderência em pista molhada</p>
                 </div>
-
                 <div class="products-grid">
-                    
-                    <!-- Card 1 -->
                     <div class="product-card">
                         <span class="badge-card-promo">Mais Vendido</span>
                         <div class="product-img-wrapper">
-                            <img src="./assets/img/aro13-70-1.webp" alt="Pneu 165/70 R13 Goodyear Direction 2" class="product-img">
+                            <img src="./assets/img/aro13-70-1.webp" alt="Pneu 165/70 R13 Goodyear" class="product-img">
                         </div>
                         <div class="product-info">
                             <span class="product-category">Passeio • Aro 13</span>
                             <h3 class="product-title">Pneu 165/70 R13 Goodyear</h3>
-                            <p class="product-desc">Linha Direction Touring 2. Excelente aderência em pista molhada e menor consumo de combustível.</p>
+                            <p class="product-desc">Linha Direction Touring 2. Excelente aderência e menor consumo.</p>
                             <div class="product-price-box">
                                 <small>Valor Unitário</small>
                                 <div class="price">R$ 279,90</div>
                                 <span class="installment">em até 6x de R$ 46,65 sem juros</span>
                             </div>
-                            <button class="btn-card-buy" onclick="adicionarEFinalizar('Passeio', '165/70 R13 (Goodyear)', 279.90)">
-                                <i class="fa-solid fa-cart-plus"></i> Comprar Agora
+                            <button class="btn-card-buy" onclick="abrirDetalhesProduto('Passeio', '165/70 R13 (Goodyear)', 279.90, 'Aro 13', '165/70 R13', 'Direction Touring 2 - Alta Aderência', 'Radial / Sem Câmara (Tubeless)', 'Goodyear')">
+                                <i class="fa-solid fa-circle-info"></i> Ver Detalhes
                             </button>
                         </div>
                     </div>
-
-                    <!-- Card 2 -->
                     <div class="product-card">
-                        <span class="badge-card-promo">Oferta Especial</span>
+                        <span class="badge-card-promo">Oferta</span>
                         <div class="product-img-wrapper">
-                            <img src="./assets/img/aro13-70-2.webp" alt="Pneu 175/70 R13 Dunlop SP Touring R1" class="product-img">
+                            <img src="./assets/img/aro13-70-2.webp" alt="Pneu 175/70 R13 Dunlop" class="product-img">
                         </div>
                         <div class="product-info">
                             <span class="product-category">Passeio • Aro 13</span>
                             <h3 class="product-title">Pneu 175/70 R13 Dunlop</h3>
-                            <p class="product-desc">Modelo SP Touring R1. Estrutura reforçada com sulcos profundos para rodar suave na cidade.</p>
+                            <p class="product-desc">Modelo SP Touring R1. Estrutura reforçada com sulcos profundos.</p>
                             <div class="product-price-box">
                                 <small>Valor Unitário</small>
                                 <div class="price">R$ 299,90</div>
                                 <span class="installment">em até 6x de R$ 49,98 sem juros</span>
                             </div>
-                            <button class="btn-card-buy" onclick="adicionarEFinalizar('Passeio', '175/70 R13 (Dunlop)', 299.90)">
-                                <i class="fa-solid fa-cart-plus"></i> Comprar Agora
+                            <button class="btn-card-buy" onclick="abrirDetalhesProduto('Passeio', '175/70 R13 (Dunlop)', 299.90, 'Aro 13', '175/70 R13', 'SP Touring R1 - Sulcos Profundos', 'Radial / Sem Câmara', 'Dunlop')">
+                                <i class="fa-solid fa-circle-info"></i> Ver Detalhes
                             </button>
                         </div>
                     </div>
-
-                    <!-- Card 3 -->
                     <div class="product-card">
                         <div class="product-img-wrapper">
-                            <img src="./assets/img/aro13-75-3.webp" alt="Pneu 175/60 R13 Pirelli Cinturato P1" class="product-img">
+                            <img src="./assets/img/aro13-75-3.webp" alt="Pneu 175/65 R14 Firestone" class="product-img">
                         </div>
                         <div class="product-info">
-                            <span class="product-category">Passeio • Aro 13</span>
-                            <h3 class="product-title">Pneu 175/60 R13 Pirelli</h3>
-                            <p class="product-desc">Linha Cinturato P1. Perfil com maior estabilidade em curvas e resposta rápida na frenagem.</p>
+                            <span class="product-category">Passeio • Aro 14</span>
+                            <h3 class="product-title">Pneu 175/65 R14 Firestone</h3>
+                            <p class="product-desc">F-700. Excelente desempenho em frenagem e durabilidade.</p>
                             <div class="product-price-box">
                                 <small>Valor Unitário</small>
-                                <div class="price">R$ 319,90</div>
-                                <span class="installment">em até 6x de R$ 53,31 sem juros</span>
+                                <div class="price">R$ 329,90</div>
+                                <span class="installment">em até 6x de R$ 54,98 sem juros</span>
                             </div>
-                            <button class="btn-card-buy" onclick="adicionarEFinalizar('Passeio', '175/60 R13 (Pirelli)', 319.90)">
-                                <i class="fa-solid fa-cart-plus"></i> Comprar Agora
+                            <button class="btn-card-buy" onclick="abrirDetalhesProduto('Passeio', '175/65 R14 (Firestone)', 329.90, 'Aro 14', '175/65 R14', 'F-700 - Alta Durabilidade', 'Radial / Alta Frenagem', 'Firestone')">
+                                <i class="fa-solid fa-circle-info"></i> Ver Detalhes
                             </button>
                         </div>
                     </div>
-
-                    <!-- Card 4 -->
-                    <div class="product-card">
-                        <div class="product-img-wrapper">
-                            <img src="assets/img/aro13-70-4.webp" alt="Pneu 155/80 R13 Continental ContiEcoContact 3" class="product-img">
-                        </div>
-                        <div class="product-info">
-                            <span class="product-category">Passeio • Aro 13</span>
-                            <h3 class="product-title">Pneu 155/80 R13 Continental</h3>
-                            <p class="product-desc">ContiEcoContact 3. Perfil alto projetado para absorver buracos com máxima resistência.</p>
-                            <div class="product-price-box">
-                                <small>Valor Unitário</small>
-                                <div class="price">R$ 269,90</div>
-                                <span class="installment">em até 6x de R$ 44,98 sem juros</span>
-                            </div>
-                            <button class="btn-card-buy" onclick="adicionarEFinalizar('Passeio', '155/80 R13 (Continental)', 269.90)">
-                                <i class="fa-solid fa-cart-plus"></i> Comprar Agora
-                            </button>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- SEÇÃO PNEUS ARO 14 -->
-        <section class="sec-produtos" id="aro13">
+        <!-- 5. Seção SUVs -->
+        <section class="sec-produtos" id="suv">
             <div class="container">
-                
                 <div class="section-title">
-                    <h2>PNEUS <span>ARO 14</span></h2>
-                    <p>Modelos com alta aderência, durabilidade e compatibilidade para o seu veículo</p>
+                    <h2>SUV'S & <span>CROSSOVERS</span></h2>
+                    <p>Robustez, estabilidade e aderência superior para veículos utilitários esportivos</p>
                 </div>
-
                 <div class="products-grid">
-                    
-                    <!-- Card 1 -->
                     <div class="product-card">
-                        <span class="badge-card-promo">Mais Vendido</span>
+                        <span class="badge-card-promo">SUV / Crossover</span>
                         <div class="product-img-wrapper">
-                            <img src="./assets/img/aro13-70-1.webp" alt="Pneu 165/70 R13 Goodyear Direction 2" class="product-img">
+                            <img src="./assets/img/aro13-75-3.webp" alt="Pneu 205/70 R15 Bridgestone" class="product-img">
                         </div>
                         <div class="product-info">
-                            <span class="product-category">Passeio • Aro 13</span>
-                            <h3 class="product-title">Pneu 165/70 R13 Goodyear</h3>
-                            <p class="product-desc">Linha Direction Touring 2. Excelente aderência em pista molhada e menor consumo de combustível.</p>
+                            <span class="product-category">SUV • Aro 15</span>
+                            <h3 class="product-title">Pneu 205/70 R15 Bridgestone</h3>
+                            <p class="product-desc">Dueler A/T. Desempenho superior em pisos secos, molhados e off-road leve.</p>
                             <div class="product-price-box">
                                 <small>Valor Unitário</small>
-                                <div class="price">R$ 279,90</div>
-                                <span class="installment">em até 6x de R$ 46,65 sem juros</span>
+                                <div class="price">R$ 549,90</div>
+                                <span class="installment">em até 6x de R$ 91,65 sem juros</span>
                             </div>
-                            <button class="btn-card-buy" onclick="adicionarEFinalizar('Passeio', '165/70 R13 (Goodyear)', 279.90)">
-                                <i class="fa-solid fa-cart-plus"></i> Comprar Agora
+                            <button class="btn-card-buy" onclick="abrirDetalhesProduto('SUV', '205/70 R15 (Bridgestone)', 549.90, 'Aro 15', '205/70 R15', 'Dueler A/T - All Terrain / SUV', 'Reforçado para Off-Road Leve', 'Bridgestone')">
+                                <i class="fa-solid fa-circle-info"></i> Ver Detalhes
                             </button>
                         </div>
                     </div>
-
-                    <!-- Card 2 -->
                     <div class="product-card">
-                        <span class="badge-card-promo">Oferta Especial</span>
+                        <span class="badge-card-promo">Alta Performance</span>
                         <div class="product-img-wrapper">
-                            <img src="./assets/img/aro13-70-2.webp" alt="Pneu 175/70 R13 Dunlop SP Touring R1" class="product-img">
+                            <img src="./assets/img/aro13-70-4.webp" alt="Pneu SUV Aro 17" class="product-img">
                         </div>
                         <div class="product-info">
-                            <span class="product-category">Passeio • Aro 13</span>
-                            <h3 class="product-title">Pneu 175/70 R13 Dunlop</h3>
-                            <p class="product-desc">Modelo SP Touring R1. Estrutura reforçada com sulcos profundos para rodar suave na cidade.</p>
+                            <span class="product-category">SUV • Aro 17</span>
+                            <h3 class="product-title">Pneu 225/65 R17 Pirelli</h3>
+                            <p class="product-desc">Scorpion Verde. Condução confortável e menor impacto ambiental.</p>
                             <div class="product-price-box">
                                 <small>Valor Unitário</small>
-                                <div class="price">R$ 299,90</div>
-                                <span class="installment">em até 6x de R$ 49,98 sem juros</span>
+                                <div class="price">R$ 689,90</div>
+                                <span class="installment">em até 6x de R$ 114,98 sem juros</span>
                             </div>
-                            <button class="btn-card-buy" onclick="adicionarEFinalizar('Passeio', '175/70 R13 (Dunlop)', 299.90)">
-                                <i class="fa-solid fa-cart-plus"></i> Comprar Agora
+                            <button class="btn-card-buy" onclick="abrirDetalhesProduto('SUV', '225/65 R17 (Pirelli)', 689.90, 'Aro 17', '225/65 R17', 'Scorpion Verde - Eco Sustentável', 'Alta Estabilidade Crossover', 'Pirelli')">
+                                <i class="fa-solid fa-circle-info"></i> Ver Detalhes
                             </button>
                         </div>
                     </div>
-
-                    <!-- Card 3 -->
-                    <div class="product-card">
-                        <div class="product-img-wrapper">
-                            <img src="./assets/img/aro13-75-3.webp" alt="Pneu 175/60 R13 Pirelli Cinturato P1" class="product-img">
-                        </div>
-                        <div class="product-info">
-                            <span class="product-category">Passeio • Aro 13</span>
-                            <h3 class="product-title">Pneu 175/60 R13 Pirelli</h3>
-                            <p class="product-desc">Linha Cinturato P1. Perfil com maior estabilidade em curvas e resposta rápida na frenagem.</p>
-                            <div class="product-price-box">
-                                <small>Valor Unitário</small>
-                                <div class="price">R$ 319,90</div>
-                                <span class="installment">em até 6x de R$ 53,31 sem juros</span>
-                            </div>
-                            <button class="btn-card-buy" onclick="adicionarEFinalizar('Passeio', '175/60 R13 (Pirelli)', 319.90)">
-                                <i class="fa-solid fa-cart-plus"></i> Comprar Agora
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Card 4 -->
-                    <div class="product-card">
-                        <div class="product-img-wrapper">
-                            <img src="assets/img/aro13-70-4.webp" alt="Pneu 155/80 R13 Continental ContiEcoContact 3" class="product-img">
-                        </div>
-                        <div class="product-info">
-                            <span class="product-category">Passeio • Aro 13</span>
-                            <h3 class="product-title">Pneu 155/80 R13 Continental</h3>
-                            <p class="product-desc">ContiEcoContact 3. Perfil alto projetado para absorver buracos com máxima resistência.</p>
-                            <div class="product-price-box">
-                                <small>Valor Unitário</small>
-                                <div class="price">R$ 269,90</div>
-                                <span class="installment">em até 6x de R$ 44,98 sem juros</span>
-                            </div>
-                            <button class="btn-card-buy" onclick="adicionarEFinalizar('Passeio', '155/80 R13 (Continental)', 269.90)">
-                                <i class="fa-solid fa-cart-plus"></i> Comprar Agora
-                            </button>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- SEÇÃO PNEUS ARO 15 -->
-        <section class="sec-produtos" id="aro13">
+        <!-- 6. Seção Utilitário -->
+        <section class="sec-produtos" id="utilitario">
             <div class="container">
-                
                 <div class="section-title">
-                    <h2>PNEUS <span>ARO 15</span></h2>
-                    <p>Modelos com alta aderência, durabilidade e compatibilidade para o seu veículo</p>
+                    <h2>UTILITÁRIO & <span>PICAPES</span></h2>
+                    <p>Resistência reforçada para vans, furgões e picapes de trabalho pesado</p>
                 </div>
-
                 <div class="products-grid">
-                    
-                    <!-- Card 1 -->
                     <div class="product-card">
-                        <span class="badge-card-promo">Mais Vendido</span>
+                        <span class="badge-card-promo">Carga Pesada</span>
                         <div class="product-img-wrapper">
-                            <img src="./assets/img/aro13-70-1.webp" alt="Pneu 165/70 R13 Goodyear Direction 2" class="product-img">
+                            <img src="./assets/img/aro13-70-1.webp" alt="Pneu Utilitário Aro 14" class="product-img">
                         </div>
                         <div class="product-info">
-                            <span class="product-category">Passeio • Aro 13</span>
-                            <h3 class="product-title">Pneu 165/70 R13 Goodyear</h3>
-                            <p class="product-desc">Linha Direction Touring 2. Excelente aderência em pista molhada e menor consumo de combustível.</p>
+                            <span class="product-category">Utilitário • Aro 14C</span>
+                            <h3 class="product-title">Pneu 185 R14C Pirelli</h3>
+                            <p class="product-desc">Chronos. Alta capacidade de carga, ideal para vans de entrega e furgões.</p>
                             <div class="product-price-box">
                                 <small>Valor Unitário</small>
-                                <div class="price">R$ 279,90</div>
-                                <span class="installment">em até 6x de R$ 46,65 sem juros</span>
+                                <div class="price">R$ 499,90</div>
+                                <span class="installment">em até 6x de R$ 83,31 sem juros</span>
                             </div>
-                            <button class="btn-card-buy" onclick="adicionarEFinalizar('Passeio', '165/70 R13 (Goodyear)', 279.90)">
-                                <i class="fa-solid fa-cart-plus"></i> Comprar Agora
+                            <button class="btn-card-buy" onclick="abrirDetalhesProduto('Utilitario', '185 R14C (Pirelli)', 499.90, 'Aro 14C', '185 R14C', 'Chronos - Carga Pesada / Vans', 'Estrutura Reforçada para Trabalho', 'Pirelli')">
+                                <i class="fa-solid fa-circle-info"></i> Ver Detalhes
                             </button>
                         </div>
                     </div>
-
-                    <!-- Card 2 -->
                     <div class="product-card">
-                        <span class="badge-card-promo">Oferta Especial</span>
+                        <span class="badge-card-promo">Resistência</span>
                         <div class="product-img-wrapper">
-                            <img src="./assets/img/aro13-70-2.webp" alt="Pneu 175/70 R13 Dunlop SP Touring R1" class="product-img">
+                            <img src="./assets/img/aro13-70-2.webp" alt="Pneu Utilitário Aro 16" class="product-img">
                         </div>
                         <div class="product-info">
-                            <span class="product-category">Passeio • Aro 13</span>
-                            <h3 class="product-title">Pneu 175/70 R13 Dunlop</h3>
-                            <p class="product-desc">Modelo SP Touring R1. Estrutura reforçada com sulcos profundos para rodar suave na cidade.</p>
+                            <span class="product-category">Utilitário • Aro 16</span>
+                            <h3 class="product-title">Pneu 245/70 R16 Goodyear</h3>
+                            <p class="product-desc">Wrangler ArmorTrac. Durabilidade excepcional em estradas de terra e asfalto.</p>
                             <div class="product-price-box">
                                 <small>Valor Unitário</small>
-                                <div class="price">R$ 299,90</div>
-                                <span class="installment">em até 6x de R$ 49,98 sem juros</span>
+                                <div class="price">R$ 789,90</div>
+                                <span class="installment">em até 6x de R$ 131,65 sem juros</span>
                             </div>
-                            <button class="btn-card-buy" onclick="adicionarEFinalizar('Passeio', '175/70 R13 (Dunlop)', 299.90)">
-                                <i class="fa-solid fa-cart-plus"></i> Comprar Agora
+                            <button class="btn-card-buy" onclick="abrirDetalhesProduto('Utilitario', '245/70 R16 (Goodyear)', 789.90, 'Aro 16', '245/70 R16', 'Wrangler ArmorTrac - Picapes 4x4', 'Resistência Extrema Asfalto e Terra', 'Goodyear')">
+                                <i class="fa-solid fa-circle-info"></i> Ver Detalhes
                             </button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
 
-                    <!-- Card 3 -->
-                    <div class="product-card">
-                        <div class="product-img-wrapper">
-                            <img src="./assets/img/aro13-75-3.webp" alt="Pneu 175/60 R13 Pirelli Cinturato P1" class="product-img">
-                        </div>
-                        <div class="product-info">
-                            <span class="product-category">Passeio • Aro 13</span>
-                            <h3 class="product-title">Pneu 175/60 R13 Pirelli</h3>
-                            <p class="product-desc">Linha Cinturato P1. Perfil com maior estabilidade em curvas e resposta rápida na frenagem.</p>
-                            <div class="product-price-box">
-                                <small>Valor Unitário</small>
-                                <div class="price">R$ 319,90</div>
-                                <span class="installment">em até 6x de R$ 53,31 sem juros</span>
-                            </div>
-                            <button class="btn-card-buy" onclick="adicionarEFinalizar('Passeio', '175/60 R13 (Pirelli)', 319.90)">
-                                <i class="fa-solid fa-cart-plus"></i> Comprar Agora
-                            </button>
-                        </div>
+        <!-- 7. Seção Serviços -->
+        <section class="sec-produtos" id="servicos">
+            <div class="container">
+                <div class="section-title">
+                    <h2>PARCEIRO <span>LOGÍSTICO</span></h2>
+                    <p>Mercado Livre Full Entrega Rápida e com Segurança</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Banner de Entrega Rápida via Mercado Livre -->
+        <section class="sec-mercadolivre">
+            <div class="container">
+                <div class="ml-banner-card">
+                    <div class="ml-icon-wrapper">
+                        <i class="fa-solid fa-bolt-lightning"></i>
                     </div>
-
-                    <!-- Card 4 -->
-                    <div class="product-card">
-                        <div class="product-img-wrapper">
-                            <img src="assets/img/aro13-70-4.webp" alt="Pneu 155/80 R13 Continental ContiEcoContact 3" class="product-img">
-                        </div>
-                        <div class="product-info">
-                            <span class="product-category">Passeio • Aro 13</span>
-                            <h3 class="product-title">Pneu 155/80 R13 Continental</h3>
-                            <p class="product-desc">ContiEcoContact 3. Perfil alto projetado para absorver buracos com máxima resistência.</p>
-                            <div class="product-price-box">
-                                <small>Valor Unitário</small>
-                                <div class="price">R$ 269,90</div>
-                                <span class="installment">em até 6x de R$ 44,98 sem juros</span>
-                            </div>
-                            <button class="btn-card-buy" onclick="adicionarEFinalizar('Passeio', '155/80 R13 (Continental)', 269.90)">
-                                <i class="fa-solid fa-cart-plus"></i> Comprar Agora
-                            </button>
-                        </div>
+                    <div class="ml-content">
+                        <span class="ml-tag">LOGÍSTICA INTEGRADA</span>
+                        <h2>ENTREGA RÁPIDA E SEGURA VIA <span class="highlight-ml">MERCADO LIVRE FULL</span></h2>
+                        <p>Receba seus pneus e rodas em tempo recorde com toda a garantia e rastreamento em tempo real direto na sua casa ou oficina.</p>
+                        <ul class="ml-features">
+                            <li><i class="fa-solid fa-check"></i> Envio Full em 24h para regiões atendidas</li>
+                            <li><i class="fa-solid fa-check"></i> Compra 100% Protegida</li>
+                            <li><i class="fa-solid fa-check"></i> Frete grátis em compras selecionadas</li>
+                        </ul>
                     </div>
-
+                    <div class="ml-action">
+                        <a href="https://wa.me/5511987488840?text=Olá!%20Vi%20no%20site%20sobre%20a%20entrega%20via%20Mercado%20Livre,%20gostaria%20de%20tirar%20dúvidas." target="_blank" class="btn-ml">
+                            <i class="fa-brands fa-whatsapp"></i> Consultar Frete Express
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Modal de Finalização -->
+    <!-- FOOTER / RODAPÉ DETALHADO -->
+    <footer class="main-footer">
+        <div class="footer-top-accent"></div>
+        <div class="container">
+            <div class="footer-grid">
+                
+                <!-- Coluna 1: Sobre e Dados da Empresa -->
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <h3>LÉO <span>PNEUS</span></h3>
+                        <small>E BORRACHARIA</small>
+                    </div>
+                    <p class="footer-desc">
+                        Especialistas em pneus, rodas esportivas e serviços automotivos de alta qualidade. Segurança, preço justo e atendimento de confiança para o seu veículo.
+                    </p>
+                    <div class="footer-cnpj">
+                        <i class="fa-solid fa-file-invoice"></i> <strong>CNPJ:</strong> 00.000.000/0001-00
+                    </div>
+                    <div class="footer-contact-email">
+                        <i class="fa-solid fa-envelope"></i> <strong>E-mail:</strong> rstenorio2015@gmail.com
+                    </div>
+                </div>
+
+                <!-- Coluna 2: Marcas de Pneus que Trabalhamos -->
+                <div class="footer-col">
+                    <h4>Marcas de Pneus</h4>
+                    <ul class="footer-links-list brands-list-grid">
+                        <li><i class="fa-solid fa-check"></i> Pirelli</li>
+                        <li><i class="fa-solid fa-check"></i> Goodyear</li>
+                        <li><i class="fa-solid fa-check"></i> Michelin</li>
+                        <li><i class="fa-solid fa-check"></i> Bridgestone</li>
+                        <li><i class="fa-solid fa-check"></i> Dunlop</li>
+                        <li><i class="fa-solid fa-check"></i> Firestone</li>
+                        <li><i class="fa-solid fa-check"></i> Continental</li>
+                        <li><i class="fa-solid fa-check"></i> BFGoodrich</li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3: Formas de Pagamento e Cartões -->
+                <div class="footer-col">
+                    <h4>Formas de Pagamento</h4>
+                    <p class="footer-text-muted">Aceitamos diversas formas para sua comodidade na loja ou pelo site:</p>
+                    <div class="payment-icons-grid">
+                        <span title="Pix"><i class="fa-solid fa-qrcode"></i> Pix</span>
+                        <span title="Boleto Bancário"><i class="fa-solid fa-barcode"></i> Boleto</span>
+                        <span title="Cartão de Crédito"><i class="fa-solid fa-credit-card"></i> Crédito</span>
+                        <span title="Cartão de Débito"><i class="fa-solid fa-credit-card"></i> Débito</span>
+                        <span title="Dinheiro / Pagar na Loja"><i class="fa-solid fa-money-bill-wave"></i> Na Loja</span>
+                    </div>
+                </div>
+
+                <!-- Coluna 4: Endereço e Horário de Atendimento -->
+                <div class="footer-col">
+                    <h4>Endereço & Contato</h4>
+                    <ul class="footer-contact-info">
+                        <li>
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>Av. Principal de Atendimento, 1000 - São Paulo / SP</span>
+                        </li>
+                        <li>
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <span>(11) 98748-8840</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-clock"></i>
+                            <span>Seg a Sex: 08h às 18h<br>Sáb: 08h às 12h</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-handshake"></i>
+                            <span><strong>Parceiro Logístico:</strong> Mercado Livre Full</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Rodapé Inferior: Copyright e Desenvolvedor -->
+            <div class="footer-bottom">
+                <p>&copy; 2026 Léo Pneus e Borracharia. Todos os direitos reservados.</p>
+                <p class="footer-dev">Desenvolvido por <strong>Global Tech Web</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Card / Modal Grande de Informações e Detalhes do Produto -->
+    <div class="product-details-modal-overlay" id="productDetailsModal">
+        <div class="product-details-modal">
+            <div class="details-modal-header">
+                <h3><i class="fa-solid fa-circle-info"></i> Informações Detalhadas do Produto</h3>
+                <button class="close-details-modal" id="closeDetailsModal">&times;</button>
+            </div>
+            <div class="details-modal-body">
+                <div class="details-info-grid">
+                    <div class="detail-row">
+                        <span class="detail-label"><i class="fa-solid fa-tag"></i> Produto / Modelo:</span>
+                        <span class="detail-value" id="detProdNome">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label"><i class="fa-solid fa-industry"></i> Marca:</span>
+                        <span class="detail-value" id="detProdMarca">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label"><i class="fa-solid fa-compact-disc"></i> Aro:</span>
+                        <span class="detail-value" id="detProdAro">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label"><i class="fa-solid fa-ruler-combined"></i> Tamanho / Medida:</span>
+                        <span class="detail-value" id="detProdTamanho">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label"><i class="fa-solid fa-clipboard-list"></i> Especificações:</span>
+                        <span class="detail-value" id="detProdEspecificacoes">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label"><i class="fa-solid fa-link"></i> Engate / Compatibilidade:</span>
+                        <span class="detail-value" id="detProdEngate">-</span>
+                    </div>
+                    <div class="detail-row highlight-price-row">
+                        <span class="detail-label"><i class="fa-solid fa-money-bill-wave"></i> Valor Unitário:</span>
+                        <span class="detail-value price-highlight" id="detProdValor">R$ 0,00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="details-modal-footer">
+                <button class="btn-details-continue" id="detailsContinueShopping">Continuar Comprando</button>
+                <button class="btn-details-checkout" id="detailsProceedCheckout"><i class="fa-solid fa-cart-shopping"></i> Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Comparativo de Marcas da Medida Escolhida -->
+    <div class="brands-modal-overlay" id="brandsModalOverlay">
+        <div class="brands-modal">
+            <div class="brands-modal-header">
+                <h3><i class="fa-solid fa-tire"></i> Opções de Marcas para: <span id="modalMedidaTitle">165/70 R13</span></h3>
+                <button class="close-brands-modal" id="closeBrandsModal">&times;</button>
+            </div>
+            <div class="brands-modal-body" id="brandsCardsContainer">
+                <!-- Preenchido dinamicamente via JavaScript -->
+            </div>
+            <div class="brands-modal-footer">
+                <button class="btn-close-modal-footer" id="closeBrandsFooter">Continuar Comprando</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Finalização do Carrinho -->
     <div class="cart-modal-overlay" id="cartModal">
         <div class="cart-modal">
             <div class="cart-header">
                 <h3><i class="fa-solid fa-cash-register"></i> Finalizar Pedido</h3>
                 <button class="close-modal" id="closeModal" aria-label="Fechar">&times;</button>
             </div>
-            
             <div class="cart-body">
-                <div class="checkout-section-title">1. Produto Escolhido:</div>
+                <div class="checkout-section-title">1. Produtos Escolhidos:</div>
                 <div id="cartItemsList">
                     <p class="empty-cart-msg">Nenhum produto selecionado.</p>
                 </div>
 
-                <div class="checkout-section-title" style="margin-top: 15px;">2. Escolha a Forma de Pagamento:</div>
-                <div class="payment-options">
+                <!-- Opção de Retirada na Loja vs Endereço -->
+                <div class="checkout-section-title" style="margin-top: 15px;">2. Forma de Recebimento:</div>
+                <div class="delivery-options">
+                    <label class="delivery-option">
+                        <input type="radio" name="deliveryMethod" value="Retirar na Loja" id="tipoRetiradaLoja" checked>
+                        <span><i class="fa-solid fa-store"></i> Retirar na Loja (Instalação Grátis)</span>
+                    </label>
+                    <label class="delivery-option">
+                        <input type="radio" name="deliveryMethod" value="Receber em Endereço" id="tipoEntregaEndereco">
+                        <span><i class="fa-solid fa-truck-fast"></i> Receber no Endereço / Entrega</span>
+                    </label>
+                </div>
+
+                <!-- Card de Endereço (Aparece apenas se escolher Receber no Endereço) -->
+                <div id="addressSection" style="display: none; margin-top: 15px;">
+                    <div class="checkout-section-title">Endereço de Recebimento:</div>
+                    <div class="address-form-grid">
+                        <div class="form-group-addr full-width">
+                            <input type="text" id="endRua" placeholder="Rua / Avenida">
+                        </div>
+                        <div class="form-group-addr">
+                            <input type="text" id="endNumero" placeholder="Número">
+                        </div>
+                        <div class="form-group-addr">
+                            <input type="text" id="endBairro" placeholder="Bairro">
+                        </div>
+                        <div class="form-group-addr full-width">
+                            <input type="text" id="endCidade" placeholder="Cidade / Estado">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkout-section-title" id="paymentTitle" style="margin-top: 15px;">3. Escolha a Forma de Pagamento:</div>
+                <div class="payment-options" id="paymentOptionsContainer">
                     <label class="payment-option">
                         <input type="radio" name="paymentMethod" value="Pix (5% de desconto à vista)" checked>
                         <span><i class="fa-solid fa-qrcode"></i> Pix (Com Desconto)</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="Boleto Bancário">
+                        <span><i class="fa-solid fa-barcode"></i> Boleto Bancário</span>
                     </label>
                     <label class="payment-option">
                         <input type="radio" name="paymentMethod" value="Cartão de Crédito">
                         <span><i class="fa-solid fa-credit-card"></i> Cartão de Crédito</span>
                     </label>
                     <label class="payment-option">
-                        <input type="radio" name="paymentMethod" value="Dinheiro / Débito na Retirada">
-                        <span><i class="fa-solid fa-money-bill-wave"></i> Dinheiro / Débito (Na Loja)</span>
+                        <input type="radio" name="paymentMethod" value="Cartão de Débito">
+                        <span><i class="fa-solid fa-credit-card"></i> Cartão de Débito</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="Pagar na Loja">
+                        <span><i class="fa-solid fa-money-bill-wave"></i> Pagar na Loja (Retirada)</span>
                     </label>
                 </div>
             </div>
-
             <div class="cart-footer">
                 <div class="cart-total">
                     <span>Valor Total:</span>
@@ -525,13 +771,14 @@
                 </div>
                 <div class="cart-actions-modal">
                     <button class="btn-continue" id="continueShopping">Continuar Comprando</button>
-                    <button class="btn-checkout" id="checkoutBtn"><i class="fa-brands fa-whatsapp"></i> Enviar Pedido no WhatsApp</button>
+                    <!-- Botão Finalizar Compra -->
+                    <button class="btn-checkout" id="checkoutBtn"><i class="fa-solid fa-envelope"></i> Finalizar Vendas</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- JS Local -->
-    <script src="./assets/js/script.js"></script>
+    <script src="./script-2.js"></script>
 </body>
 </html>
