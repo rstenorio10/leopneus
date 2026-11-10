@@ -1,11 +1,5 @@
-/* ==========================================================================
-   LÓGICA PRINCIPAL DO SITE - LÉO PNEUS E BORRACHARIA
-   ========================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-
-    /* --------------------------------------------------------------------------
-       1. SLIDER DO BANNER PRINCIPAL (HERO)
-       -------------------------------------------------------------------------- */
+    // 1. Slider do Banner Principal (Hero)
     const slides = document.querySelectorAll('.hero-slide');
     const dots = document.querySelectorAll('.slide-dots .dot');
     let currentSlide = 0;
@@ -24,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         slides[index].setAttribute('aria-hidden', 'false');
         if (dots[index]) {
             dots[index].classList.add('active');
-            dots[index].setAttribute('aria-current', 'true');
+            dots[index].removeAttribute('aria-current', 'true');
         }
     }
 
@@ -42,10 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 5000);
     }
 
-
-    /* --------------------------------------------------------------------------
-       2. BASE DE DADOS DE MARCAS E CATÁLOGO
-       -------------------------------------------------------------------------- */
+    // 2. Base de Dados de Marcas para cada Medida
     const catalogoMarcas = {
         "165/70 R13": [
             { marca: "Goodyear", linha: "Direction Touring 2", preco: 279.90 },
@@ -57,6 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
             { marca: "Goodyear", linha: "Assurance", preco: 329.90 },
             { marca: "Pirelli", linha: "P400 Evo", preco: 339.90 }
         ],
+        "175/60 R13": [
+            { marca: "Pirelli", linha: "Phantoms Sport", preco: 319.90 },
+            { marca: "Firestone", linha: "F-700", preco: 299.90 },
+            { marca: "Michelin", linha: "Energy XM2", preco: 359.90 }
+        ],
         "175/65 R14": [
             { marca: "Firestone", linha: "F-700", preco: 329.90 },
             { marca: "Pirelli", linha: "Cinturato P1", preco: 359.90 },
@@ -66,6 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
             { marca: "Pirelli", linha: "Cinturato P1", preco: 359.90 },
             { marca: "Michelin", linha: "Energy XM2+", preco: 419.90 },
             { marca: "Dunlop", linha: "SP Touring", preco: 339.90 }
+        ],
+        "185 R14C": [
+            { marca: "Pirelli", linha: "Chronos (Utilitário)", preco: 499.90 },
+            { marca: "Goodyear", linha: "Cargo G26", preco: 529.90 },
+            { marca: "Firestone", linha: "Vanhawk 2", preco: 479.90 }
         ],
         "195/55 R15": [
             { marca: "Michelin", linha: "Pilot Sport 4", preco: 439.90 },
@@ -82,20 +83,43 @@ document.addEventListener('DOMContentLoaded', () => {
             { marca: "Michelin", linha: "Primacy 4", preco: 559.90 },
             { marca: "Pirelli", linha: "Cinturato P7", preco: 519.90 }
         ],
+        "245/70 R16": [
+            { marca: "Goodyear", linha: "Wrangler ArmorTrac", preco: 789.90 },
+            { marca: "Pirelli", linha: "Scorpion ATR", preco: 819.90 },
+            { marca: "Bridgestone", linha: "Dueler H/T", preco: 799.90 }
+        ],
         "225/65 R17": [
             { marca: "Pirelli", linha: "Scorpion Verde", preco: 689.90 },
             { marca: "Michelin", linha: "Primacy SUV", preco: 769.90 },
             { marca: "Bridgestone", linha: "Alenza 001", preco: 739.90 }
+        ],
+        "215/50 R17": [
+            { marca: "Continental", linha: "ContiMaxContact", preco: 599.90 },
+            { marca: "Michelin", linha: "Pilot Sport 4", preco: 649.90 },
+            { marca: "Pirelli", linha: "Cinturato P7", preco: 579.90 }
+        ],
+        "235/60 R18": [
+            { marca: "SUV Premium", linha: "CrossContact LX2", preco: 849.90 },
+            { marca: "Michelin", linha: "Latitude Sport 3", preco: 929.90 },
+            { marca: "Pirelli", linha: "Scorpion Zero", preco: 889.90 }
+        ],
+        "235/55 R19": [
+            { marca: "Sport High", linha: "Eagle F1 Asymmetric", preco: 989.90 },
+            { marca: "Michelin", linha: "Latitude Sport 3", preco: 1050.00 },
+            { marca: "Continental", linha: "ContiSportContact", preco: 969.90 }
+        ],
+        "275/60 R20": [
+            { marca: "Utilitário Pesado", linha: "Wrangler Territory AT", preco: 1290.00 },
+            { marca: "Bridgestone", linha: "Dueler A/T Revo 3", preco: 1350.00 },
+            { marca: "BFGoodrich", linha: "All-Terrain T/A KO2", preco: 1490.00 }
         ]
     };
 
-
-    /* --------------------------------------------------------------------------
-       3. MENU CASCATA DO SELETOR RÁPIDO
-       -------------------------------------------------------------------------- */
+    // 3. Menu Cascata do Seletor Rápido de Pneus
     const selectorWrapper = document.querySelector('.selector-dropdown-wrapper');
     const selectTrigger = document.getElementById('selectAroTrigger');
     const medidaOptions = document.querySelectorAll('.medida-option');
+
     const brandsModalOverlay = document.getElementById('brandsModalOverlay');
     const closeBrandsModal = document.getElementById('closeBrandsModal');
     const closeBrandsFooter = document.getElementById('closeBrandsFooter');
@@ -117,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         option.addEventListener('click', (e) => {
             e.stopPropagation();
             selectorWrapper.classList.remove('active');
+
             const medidaEscolhida = option.getAttribute('data-medida');
             abrirModalMarcas(medidaEscolhida);
         });
@@ -124,29 +149,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function abrirModalMarcas(medida) {
         if (!modalMedidaTitle || !brandsCardsContainer) return;
+
         modalMedidaTitle.textContent = medida;
         brandsCardsContainer.innerHTML = '';
 
         const marcasDisponiveis = catalogoMarcas[medida] || [
             { marca: "Goodyear", linha: "Direction Touring", preco: 299.90 },
-            { marca: "Pirelli", linha: "Cinturato", preco: 319.90 }
+            { marca: "Pirelli", linha: "Cinturato", preco: 319.90 },
+            { marca: "Firestone", linha: "F-700", preco: 289.90 }
         ];
 
         marcasDisponiveis.forEach(item => {
             brandsCardsContainer.innerHTML += `
-                <div class="brand-card-item" style="background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:15px; display:flex; flex-direction:column; justify-content:space-between;">
-                    <div>
-                        <span style="background:rgba(255,183,3,0.15); color:#fb8500; font-size:0.7rem; font-weight:800; padding:3px 8px; border-radius:6px;">Em Estoque</span>
-                        <h4 style="font-size:1.05rem; margin:8px 0 4px 0; color:#121417;">${item.marca}</h4>
-                        <p style="font-size:0.78rem; color:#5a6578; margin-bottom:10px;">Linha: ${item.linha}</p>
+                <div class="brand-card-item">
+                    <div class="brand-card-top">
+                        <span>Disponível em Estoque</span>
+                        <h4>${item.marca}</h4>
+                        <p>Linha: ${item.linha} • Aro ${medida}</p>
                     </div>
-                    <div style="border-top:1px solid #e2e8f0; padding-top:8px; margin-bottom:10px;">
-                        <small style="font-size:0.7rem; color:#5a6578;">Unitário</small>
-                        <div style="font-size:1.2rem; font-weight:800; color:#fb8500;">R$ ${item.preco.toFixed(2).replace('.', ',')}</div>
+                    <div class="brand-price-box">
+                        <small>Valor Unitário</small>
+                        <div class="price">R$ ${item.preco.toFixed(2).replace('.', ',')}</div>
                     </div>
-                    <button class="btn-add-brand-cart" style="background:#121417; color:#ffb703; font-weight:700; font-size:0.8rem; padding:8px; border-radius:6px; border:none; cursor:pointer;" onclick="abrirDetalhesProduto('Pneu', '${medida} (${item.marca} - ${item.linha})', ${item.preco}, 'Aro ' + '${medida}'.split(' ')[1], '${medida}', 'Radial Certificado INMETRO', 'Compatível com veículos de passeio', '${item.marca}')">
-                        <i class="fa-solid fa-circle-info"></i> Ver Detalhes
-                    </button>
+                    <div class="brand-card-actions">
+                        <button class="btn-add-brand-cart" onclick="abrirDetalhesProduto('Pneu', '${medida} (${item.marca} - ${item.linha})', ${item.preco}, 'Aro ' + '${medida}'.split(' ')[1], '${medida}', 'Radial de Alta Performance Certificado INMETRO', 'Compatível com veículos de passeio e utilitários', '${item.marca}')">
+                            <i class="fa-solid fa-circle-info"></i> Ver Detalhes & Comprar
+                        </button>
+                    </div>
                 </div>
             `;
         });
@@ -157,20 +186,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closeBrandsModal) closeBrandsModal.addEventListener('click', () => brandsModalOverlay.classList.remove('active'));
     if (closeBrandsFooter) closeBrandsFooter.addEventListener('click', () => brandsModalOverlay.classList.remove('active'));
 
-
-    /* --------------------------------------------------------------------------
-       4. CONTROLE DE MODAIS (DETALHES E CARRINHO)
-       -------------------------------------------------------------------------- */
+    // 4. Controle do Card/Modal de Informações Detalhadas do Produto
     const productDetailsModal = document.getElementById('productDetailsModal');
     const closeDetailsModal = document.getElementById('closeDetailsModal');
     const detailsContinueShopping = document.getElementById('detailsContinueShopping');
     const detailsProceedCheckout = document.getElementById('detailsProceedCheckout');
     const addToCartBtn = document.getElementById('addToCartBtn');
-    
+
     let produtoAtualTemp = null;
 
     window.abrirDetalhesProduto = function(categoria, nomeProd, preco, aro, tamanho, especificacoes, engate, marca) {
-        produtoAtualTemp = { categoria, medida: nomeProd, precoUnitario: preco };
+        produtoAtualTemp = {
+            categoria: categoria,
+            medida: nomeProd,
+            precoUnitario: preco
+        };
 
         document.getElementById('detProdNome').textContent = nomeProd;
         document.getElementById('detProdMarca').textContent = marca;
@@ -187,16 +217,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closeDetailsModal) closeDetailsModal.addEventListener('click', () => productDetailsModal.classList.remove('active'));
     if (detailsContinueShopping) detailsContinueShopping.addEventListener('click', () => productDetailsModal.classList.remove('active'));
 
-    // Botão do seletor rápido
     if (addToCartBtn) {
         addToCartBtn.addEventListener('click', () => {
             const tipoVeiculo = document.getElementById('tipoVeiculo').value;
             const medidaVal = document.getElementById('medidaPneu').value;
             const quantidade = parseInt(document.getElementById('qtdPneu').value, 10);
-            const [medidaText, precoStr] = medidaVal.split('|');
-            const precoUnitario = parseFloat(precoStr);
-            const valorTotalItem = precoUnitario * quantidade;
+            
+            const [medidaText, precoUnitarioStr] = medidaVal.split('|');
+            const precoUnitario = parseFloat(precoUnitarioStr);
 
+            // Seletor rápido mantém a quantidade escolhida pelo usuário nos selects
+            const valorTotalItem = precoUnitario * quantidade;
             cart.push({
                 id: Date.now() + Math.random(),
                 categoria: tipoVeiculo,
@@ -211,11 +242,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Botão "Finalizar Compra" no card de detalhes (Adiciona 1 unidade conforme regra)
+    // Quando clica em Finalizar Compra no card de detalhes do catálogo, adiciona EXATAMENTE 1 unidade (valor unitário)
     if (detailsProceedCheckout) {
         detailsProceedCheckout.addEventListener('click', () => {
             if (produtoAtualTemp) {
-                const quantidade = 1; 
+                const quantidade = 1; // Regra aplicada: apenas 1 unidade por padrão ao vir dos cards do catálogo
                 const valorTotalItem = produtoAtualTemp.precoUnitario * quantidade;
 
                 cart.push({
@@ -234,10 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
-    /* --------------------------------------------------------------------------
-       5. CARRINHO DE COMPRAS E ENVIO AUTOMÁTICO DE E-MAIL (EMAILJS)
-       -------------------------------------------------------------------------- */
+    // 5. Lógica do Carrinho e Envio Automático por E-mail via EmailJS
     let cart = [];
     const cartCountElem = document.getElementById('cartCount');
     const cartModal = document.getElementById('cartModal');
@@ -247,16 +275,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartItemsList = document.getElementById('cartItemsList');
     const cartTotalPrice = document.getElementById('cartTotalPrice');
     const checkoutBtn = document.getElementById('checkoutBtn');
+
     const tipoRetiradaLoja = document.getElementById('tipoRetiradaLoja');
     const tipoEntregaEndereco = document.getElementById('tipoEntregaEndereco');
     const addressSection = document.getElementById('addressSection');
 
     if (tipoRetiradaLoja && tipoEntregaEndereco && addressSection) {
         tipoRetiradaLoja.addEventListener('change', () => {
-            if (tipoRetiradaLoja.checked) addressSection.style.display = 'none';
+            if (tipoRetiradaLoja.checked) {
+                addressSection.style.display = 'none';
+            }
         });
         tipoEntregaEndereco.addEventListener('change', () => {
-            if (tipoEntregaEndereco.checked) addressSection.style.display = 'block';
+            if (tipoEntregaEndereco.checked) {
+                addressSection.style.display = 'block';
+            }
         });
     }
 
@@ -278,6 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateCartUI() {
         const totalItens = cart.reduce((acc, item) => acc + item.quantidade, 0);
         if (cartCountElem) cartCountElem.textContent = totalItens;
+
         if (!cartItemsList) return;
 
         if (cart.length === 0) {
@@ -294,10 +328,10 @@ document.addEventListener('DOMContentLoaded', () => {
             cartItemsList.innerHTML += `
                 <div class="cart-item">
                     <div class="cart-item-info">
-                        <h4 style="font-size:0.85rem; font-weight:700;">${item.medida}</h4>
-                        <span style="font-size:0.75rem; color:#5a6578;">${item.quantidade}x R$ ${item.precoUnitario.toFixed(2).replace('.', ',')} = <strong>R$ ${item.total.toFixed(2).replace('.', ',')}</strong></span>
+                        <h4>Item: ${item.medida} (${item.categoria})</h4>
+                        <span>${item.quantidade}x R$ ${item.precoUnitario.toFixed(2).replace('.', ',')} = <strong>R$ ${item.total.toFixed(2).replace('.', ',')}</strong></span>
                     </div>
-                    <button class="btn-remove-item" onclick="removerItemCarrinho(${item.id})" title="Remover">
+                    <button class="btn-remove-item" onclick="removerItemCarrinho(${item.id})" title="Remover item">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                 </div>
@@ -307,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (cartTotalPrice) cartTotalPrice.textContent = `R$ ${totalGeral.toFixed(2).replace('.', ',')}`;
     }
 
-    // Disparo automático do E-mail ao finalizar
+    // Ação ao clicar em "Finalizar Vendas" (Dispara o e-mail automaticamente)
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', () => {
             if (cart.length === 0) {
@@ -317,6 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const formaRecebimento = document.querySelector('input[name="deliveryMethod"]:checked').value;
             const formaPagamento = document.querySelector('input[name="paymentMethod"]:checked').value;
+            
             let rua = "", numero = "", bairro = "", cidade = "";
 
             if (formaRecebimento === "Receber em Endereço") {
@@ -326,33 +361,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 cidade = document.getElementById('endCidade').value.trim();
 
                 if (!rua || !numero || !bairro || !cidade) {
-                    alert('Por favor, preencha todos os campos do endereço!');
+                    alert('Por favor, preencha todos os campos do endereço de recebimento!');
                     document.getElementById('endRua').focus();
                     return;
                 }
             }
 
-            let corpoMensagem = "🎉 PARABÉNS! NOVA VENDA REALIZADA NO SITE!\n\nDetalhes do pedido:\n\n";
+            // Criando o corpo da mensagem com os parabéns e os dados da venda
+            let corpoMensagem = "🎉 PARABÉNS! NOVA VENDA REALIZADA NO SITE!\n\n";
+            corpoMensagem += "Detalhes do pedido:\n\n";
+            
             let totalGeral = 0;
-
             cart.forEach((item, index) => {
-                corpoMensagem += `${index + 1}. ${item.medida} (${item.categoria})\n   Qtd: ${item.quantidade}x - Subtotal: R$ ${item.total.toFixed(2).replace('.', ',')}\n\n`;
+                corpoMensagem += `${index + 1}. ${item.medida} (${item.categoria})\n`;
+                corpoMensagem += `   Quantidade: ${item.quantidade}x\n`;
+                corpoMensagem += `   Subtotal: R$ ${item.total.toFixed(2).replace('.', ',')}\n\n`;
                 totalGeral += item.total;
             });
 
             corpoMensagem += `----------------------------------------\n`;
-            corpoMensagem += `RECEBIMENTO: ${formaRecebimento}\n`;
+            corpoMensagem += `FORMA DE RECEBIMENTO: ${formaRecebimento}\n`;
+            
             if (formaRecebimento === "Retirar na Loja") {
-                corpoMensagem += `> Retirada na loja com instalação grátis.\n`;
+                corpoMensagem += `> O cliente irá retirar na loja (Instalação Grátis).\n`;
             } else {
-                corpoMensagem += `ENDEREÇO: ${rua}, Nº ${numero} - ${bairro} (${cidade})\n`;
+                corpoMensagem += `ENDEREÇO DE ENTREGA:\n`;
+                corpoMensagem += `Rua: ${rua}, Nº ${numero}\n`;
+                corpoMensagem += `Bairro: ${bairro} - Cidade: ${cidade}\n`;
             }
-            corpoMensagem += `PAGAMENTO: ${formaPagamento}\n`;
+
+            corpoMensagem += `\nFORMA DE PAGAMENTO: ${formaPagamento}\n`;
             corpoMensagem += `VALOR TOTAL: R$ ${totalGeral.toFixed(2).replace('.', ',')}\n`;
             corpoMensagem += `----------------------------------------\n`;
 
             checkoutBtn.disabled = true;
-            checkoutBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Enviando...`;
+            checkoutBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Enviando venda...`;
 
             const templateParams = {
                 to_email: 'rstenorio2015@gmail.com',
@@ -361,7 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             emailjs.send('seu_service_id', 'seu_template_id', templateParams)
                 .then(function(response) {
-                    alert('Parabéns! Venda finalizada com sucesso e enviada para o seu e-mail!');
+                    alert('Parabéns! Sua venda foi finalizada com sucesso e os dados foram enviados para o seu e-mail!');
                     cart = [];
                     updateCartUI();
                     cartModal.classList.remove('active');
@@ -375,5 +418,4 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
         });
     }
-
 });
